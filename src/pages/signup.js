@@ -1,11 +1,9 @@
 import React from 'react'
 import { StyleSheet, Text, TextInput, View, Button } from 'react-native'
-
-
-export default class Login extends React.Component {
+export default class SignUp extends React.Component {
   state = { email: '', password: '', errorMessage: null }
-  handleLogin = () => {
-    
+handleSignUp = () => {
+ 
     var pattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/; 
 
     var regexemail = new RegExp(pattern);
@@ -22,41 +20,39 @@ export default class Login extends React.Component {
         return;
      }
      if(this.state.password == "") {
-        alert("Campo email vazio")
+        alert("Campo senha vazio")
 
         return
     }
 
-
-
-  }
-  render() {
+}
+render() {
     return (
       <View style={styles.container}>
-        <Text>Acesso</Text>
+        <Text>Cadastrar</Text>
         {this.state.errorMessage &&
           <Text style={{ color: 'red' }}>
             {this.state.errorMessage}
           </Text>}
         <TextInput
-          style={styles.textInput}
-          autoCapitalize="none"
           placeholder="Email"
+          autoCapitalize="none"
+          style={styles.textInput}
           onChangeText={email => this.setState({ email })}
           value={this.state.email}
         />
         <TextInput
           secureTextEntry
-          style={styles.textInput}
+          placeholder="Password"
           autoCapitalize="none"
-          placeholder="Senha"
+          style={styles.textInput}
           onChangeText={password => this.setState({ password })}
           value={this.state.password}
         />
-        <Button title="Login" onPress={this.handleLogin} />
+        <Button title="Cadastrar" onPress={this.handleSignUp} />
         <Button
-          title="Você não tem uma conta? Cadastrar"
-          onPress={() => this.props.navigation.navigate('SignUp')}
+          title="Você já possui uma conta? Acessar"
+          onPress={() => this.props.navigation.navigate('Login')}
         />
       </View>
     )
