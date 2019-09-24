@@ -1,5 +1,6 @@
 import React from 'react'
 import { StyleSheet, Text, TextInput, View, Button } from 'react-native'
+import User from '../controller/logincontroller'
 
 
 export default class Login extends React.Component {
@@ -22,12 +23,28 @@ export default class Login extends React.Component {
         return;
      }
      if(this.state.password == "") {
-        alert("Campo email vazio")
+        alert("Campo senha vazio")
 
         return
     }
 
+   var user = new User();
+   var self = this
 
+   var model = {
+       email: this.state.email,
+       password: this.state.password
+   }
+
+   user.login(model,
+    function(dados){
+        self.props.navigation.navigate('Main')
+    }, function(error){
+        console.log(error);
+        
+        
+
+    })
 
   }
   render() {
